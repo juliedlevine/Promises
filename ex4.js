@@ -12,9 +12,9 @@ var urls = [
 var filenames = [
     'futureswiki.html',
     'cpswiki.html',
-    'jswiki.js',
-    'nodewiki.js',
-    'chromewiki.js'
+    'jswiki.html',
+    'nodewiki.html',
+    'chromewiki.html'
 ];
 
 var urlGet = urls.map(function(url) {
