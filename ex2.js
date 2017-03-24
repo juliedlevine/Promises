@@ -18,7 +18,7 @@ var outputFilename = 'output.txt';
 //     });
 
 
-function readAndWrite(filename) {
+function readAndWrite(filename, outputFilename) {
     return fs.readFile(filename)
         .then(function(buffer) {
             var content = buffer.toString().toUpperCase();
@@ -27,7 +27,7 @@ function readAndWrite(filename) {
         });
 }
 
-readAndWrite(filename)
+readAndWrite(filename, outputFilename)
     .then(function() {
         console.log('Wrote contents to ' + outputFilename);
     })
