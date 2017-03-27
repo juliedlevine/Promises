@@ -1,6 +1,7 @@
 require('any-promise/register/bluebird');
 var Promise = require('bluebird');
 var fs = require('fs-promise');
+var _ = require('lodash');
 
 function spliceMultiple(filesArray, outputFile) {
     // Map over each file and return a read file function for each
@@ -13,9 +14,15 @@ function spliceMultiple(filesArray, outputFile) {
         // bufferArray is what you get back from the fulfilled promise
         .then(function(bufferArray) {
             // Turn the buffers into strings, split into an array with each entry a single line from each file
-            var stringArray = bufferArray.toString().split('\n');
-        });
+            var stringArray = bufferArray.map(function(item) {
+                return item.toString().split('\n');
+            });
+            // Zip takes index of each array and puts in a new array
+            var spliced = _.zip.apply(null, stringArray);
+            var newMessage = _.flatten(spliced).join('\n');
 
+            return fs.writeFile('output8.txt', newMessage);
+        });
 }
 
 
@@ -28,12 +35,3 @@ spliceMultiple(files, 'output.txt')
     .catch(function(err) {
         console.log(err.message);
 });
-
-
-// .then(function(contentArray) {
-//     var newFile = contentArray.map(function(message) {
-//         return message;
-//     });
-//     var newFileString = newFile.join('\n');
-//     return fs.writeFile(outputFile, newFileString);
-// });

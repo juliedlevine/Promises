@@ -1,0 +1,3 @@
+Now this is
+the contents of
+the third file

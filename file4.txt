@@ -1,0 +1,5 @@
+And here
+we have the contents
+of the fourth file
+More text here
+and still more
